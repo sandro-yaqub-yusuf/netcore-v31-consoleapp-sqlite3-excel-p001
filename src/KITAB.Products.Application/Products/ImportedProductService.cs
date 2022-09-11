@@ -22,7 +22,9 @@ namespace KITAB.Products.Application.Products
         {
             try
             {
-                _excelRepository.ImportProducts(ref p_fileName);
+                List<ImportedProduct> products = _excelRepository.ImportProducts(ref p_fileName);
+
+                _importedproductRepository.SaveAll(ref products);
             }
             catch (Exception ex)
             {

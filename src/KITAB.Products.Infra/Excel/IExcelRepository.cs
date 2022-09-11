@@ -7,6 +7,6 @@ namespace KITAB.Products.Infra.Excel
     {
         string GetPathFileName(ref string p_fileName, bool p_deleteFile = false);
         void ExportProducts(ref List<ExportedProduct> p_products, ref string p_fileName);
-        void ImportProducts(ref string p_fileName);
+        List<ImportedProduct> ImportProducts(ref string p_fileName);
     }
 }

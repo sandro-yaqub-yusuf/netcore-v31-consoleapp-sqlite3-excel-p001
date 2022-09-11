@@ -89,6 +89,23 @@ namespace KITAB.Products.ConsoleApp
 
             _importedProductService.ImportFromEXCEL(ref fileName);
 
+            Console.WriteLine("Listando todos os produtos da tabela de Importação de Produtos...");
+            Console.WriteLine("");
+
+            // Pega todos os produtos na tabela "ImportedProduct"
+            var products = _importedProductService.GetAll();
+
+            if (!_notificatorService.HaveNotification())
+            {
+                foreach (var product in products)
+                {
+                    Console.WriteLine("ID: " + product.Id + " - Produto: " + product.Description + " - " +
+                                      "Quantidade: " + product.Inventory + " - Preço de Venda: " + product.SalePrice);
+                }
+            }
+
+            Console.WriteLine("");
+
             return (!_notificatorService.HaveNotification());
         }
 

@@ -36,5 +36,56 @@ namespace KITAB.Products.Infra.Products
 
             return products;
         }
+
+        public void ExecuteSQL(ref string p_sql)
+        {
+            if (File.Exists(DbFile))
+            {
+                using var cnn = SimpleDbConnection();
+
+                cnn.Open();
+
+                using (var transaction = cnn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Executa as instruções sql na tabela "Product"
+                        cnn.Execute(p_sql);
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+
+                        throw new Exception(ex.Message);
+                    }
+                }
+
+                cnn?.Close();
+                cnn?.Dispose();
+            }
+        }
+
+        public void SaveAll(ref List<ImportedProduct> p_products)
+        {
+            try
+            {
+                var sql = "DELETE FROM ImportedProduct; ";
+
+                foreach (var product in p_products)
+                {
+                    sql += string.Format(@"INSERT INTO ImportedProduct (Id, Name, Description, Inventory, CostPrice, SalePrice) 
+                                           VALUES ({0}, '{1}', '{2}', {3}, {4}, {5}); ", product.Id, product.Name, product.Description,
+                                           product.Inventory, product.CostPrice, product.SalePrice);
+                }
+
+                ExecuteSQL(ref sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
