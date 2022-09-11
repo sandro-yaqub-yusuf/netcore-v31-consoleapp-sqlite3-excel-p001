@@ -3,7 +3,7 @@
 * Linguagem principal: C# (CSharp)
 * Frameworks utilizadas: DotNet Core versão 3.1
 * Outras linguagens: nenhum
-* Pacotes extras utilizadas: AutoMapper, ClosedXML, FluentValidator, Dapper e Microsoft Extensions Dependency Injection
+* Pacotes extras utilizadas: ClosedXML, FluentValidator, Dapper e Microsoft Extensions Dependency Injection
 * Banco de Dados utilizado: SQLite3
 * Template utilizado: nenhum
 * Editor utilizado: Visual Studio 2019

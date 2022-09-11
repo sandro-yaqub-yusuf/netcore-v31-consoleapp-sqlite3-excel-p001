@@ -2,7 +2,6 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using AutoMapper;
 using KITAB.Products.Application.Notificators;
 using KITAB.Products.Application.Products;
 using KITAB.Products.ConsoleApp.Configurations;
@@ -14,14 +13,12 @@ namespace KITAB.Products.ConsoleApp
         private readonly INotificatorService _notificatorService;
         private readonly IExportedProductService _exportedProductService;
         private readonly IImportedProductService _importedProductService;
-        private readonly IMapper _mapper;
 
-        public ConsoleApplication(INotificatorService notificatorService, IExportedProductService exportedProductService, IImportedProductService importedProductService, IMapper mapper)
+        public ConsoleApplication(INotificatorService notificatorService, IExportedProductService exportedProductService, IImportedProductService importedProductService)
         {
             _notificatorService = notificatorService;
             _exportedProductService = exportedProductService;
             _importedProductService = importedProductService;
-            _mapper = mapper;
         }
 
         public void Run()
